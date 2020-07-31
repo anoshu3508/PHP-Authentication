@@ -1,0 +1,16 @@
+
+/* Google Web Fonts */
+@import url(/admin/css/vendor/google/opensans.css);
+
+/* We Love Icon Fonts */
+@import url(/admin/css/vendor/weloveiconfonts/fontawesome.css);
+[class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+
+/* Simple Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

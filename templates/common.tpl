@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>{$PAGE_TITLE} | アクティブゼロ管理画面</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="shortcut icon" type="image/vnd.microsoft.icon" sizes="16x16" href="/admin/favicon.ico" />
+        <!-- CSS -->
+        <link rel="stylesheet" href="/admin/css/common.css">
+        {if isset($CSS_FILE_NAME)}
+            <link rel="stylesheet" href="/admin/css/{$CSS_FILE_NAME}.css">
+        {/if}
+        <!-- JavaScript -->
+        <script src="/admin/js/vendor/jquery-3.5.1.min.js"></script>
+        {* <script type="text/javascript" src="/admin/js/common.js"></script> *}
+        {if isset($JS_FILE_NAME)}
+            <script type="text/javascript" src="/admin/js/{$JS_FILE_NAME}.js"></script>
+        {/if}
+    </head>
+    <body>
+        {include file='parts/header.tpl'}
+        {$MAIN_HTML}
+        {include file='parts/footer.tpl'}
+    </body>
+</html>

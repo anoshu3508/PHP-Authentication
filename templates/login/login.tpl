@@ -1,13 +1,14 @@
-<html>
-    <head>
-        <title>ログイン | アクティブゼロ管理画面</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="/admin/css/login.css">
-    </head>
-    <body>
+
         <div class="form-wrapper">
             <h1>Sign In</h1>
-            <form>
+            <form action="/admin/" method="POST" autocomplete="off">
+                <input type="hidden" name="action" value="authentication" />
+
+                {if $errorFlg}
+                    <div class="form-item">
+                        <span class="error_message">メールアドレス または パスワードが間違っています</span>
+                    </div>
+                {/if}
                 <div class="form-item">
                     <label for="email"></label>
                     <input type="email" name="email" required="required" placeholder="メールアドレス"></input>
@@ -21,9 +22,7 @@
                 </div>
             </form>
             <div class="form-footer">
-                {*<p><a href="#">Create an account</a></p>*}
-                {*<p><a href="#">Forgot password?</a></p>*}
+                <p><a href="javascript:createAccountLink();">Create an account</a></p>
+                {* <p><a href="#">Forgot password?</a></p> *}
             </div>
         </div>
-    </body>
-</html>

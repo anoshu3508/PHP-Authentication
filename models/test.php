@@ -34,3 +34,11 @@ if (is_null($user)) {
     $user->delete();
     echo "user deleted".PHP_EOL;
 }
+
+// 一覧
+$userObj = Sentinel::getUserRepository();
+$roleObj = Sentinel::getRoleRepository();
+$persistenceObj = Sentinel::getPersistenceRepository();
+$activationObj = Sentinel::getActivationRepository();
+$reminderObj = Sentinel::getReminderRepository();
+$throttleObj = Sentinel::getThrottleRepository();

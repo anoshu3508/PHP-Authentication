@@ -228,13 +228,15 @@ return [
         'ip' => [
             'interval' => 900,
 
-            'thresholds' => 5,
+            // 'thresholds' => 5,
+            'thresholds' => 100,
         ],
 
         'user' => [
             'interval' => 900,
 
-            'thresholds' => 5,
+            // 'thresholds' => 5,
+            'thresholds' => 100,
         ],
     ],
 ];
