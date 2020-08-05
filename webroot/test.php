@@ -11,7 +11,7 @@ $capsule = new Capsule();
 
 $capsule->addConnection([
     'driver'    => 'mysql',
-    'host'      => 'localhost',
+    'host'      => 'mysql.activezero.co.jp',
     'database'  => 'activezero_co_jp',
     'username'  => 'activezero',
     'password'  => 'Activezero1101',

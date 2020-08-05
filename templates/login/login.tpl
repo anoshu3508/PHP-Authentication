@@ -1,7 +1,7 @@
 
         <div class="form-wrapper">
             <h1>Sign In</h1>
-            <form action="/admin/" method="POST" autocomplete="off">
+            <form action="/employee/" method="POST">
                 <input type="hidden" name="action" value="authentication" />
 
                 {if $errorFlg}
@@ -22,7 +22,7 @@
                 </div>
             </form>
             <div class="form-footer">
-                <p><a href="javascript:createAccountLink();">Create an account</a></p>
+                {* <p><a href="#">Create an account</a></p> *}
                 {* <p><a href="#">Forgot password?</a></p> *}
             </div>
         </div>

@@ -9,9 +9,6 @@ if ($USER_INFO !== null) {
 
 $smarty->assign('PAGE_TITLE', "ログイン");
 $smarty->assign('CSS_FILE_NAME', "login");
-$smarty->assign('JS_FILE_NAME', "login");
-
+// $smarty->assign('JS_FILE_NAME', "login");
 $smarty->assign('errorFlg', false);
-
-$loginTemplate = $smarty->fetch('login/login.tpl');
-$smarty->assign('MAIN_HTML', $loginTemplate);
+$smarty->assign('MAIN_HTML', $smarty->fetch('login/login.tpl'));

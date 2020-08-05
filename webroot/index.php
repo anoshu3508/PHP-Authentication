@@ -1,11 +1,14 @@
 <?php
+// General filepath constants
+require dirname(__DIR__) . '/config/paths.php';
+
 // Include the composer autoload file
-require '../vendor/autoload.php';
+require VENDOR . 'autoload.php';
 
 $smarty = new Smarty();
-$smarty->template_dir = '../templates';
-$smarty->compile_dir = '../templates_c';
-$smarty->config_dir = '../configs';
-$smarty->cache_dir = '../cache';
+$smarty->template_dir = TEMPLATES;
+$smarty->compile_dir = TEMPLATES_COMPILE;
+$smarty->config_dir = CONFIG;
+$smarty->cache_dir = CACHE;
 
-require '../models/common.php';
+require MODEL . 'common.php';

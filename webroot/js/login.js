@@ -1,5 +1,5 @@
 function createAccountLink() {
-    $('<form/>',{action:"/admin/", method:"post"})
+    $('<form/>',{action:"/employee/", method:"post"})
     .append("<input type='hidden' name='action' value='userRegistInput'>")
     .appendTo($('body'))
     .submit();
