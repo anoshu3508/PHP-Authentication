@@ -1,0 +1,35 @@
+.menu .menu_list {
+    position: relative;
+    text-align: center;
+    width: 20%;
+    min-width: 300px;
+    margin: 1em auto;
+	padding: 0;
+	list-style-type: none;
+}
+
+.menu .menu_list li {
+	background: #ffe082;
+	border-left: 6px solid #ffa000;
+	border-bottom: 2px solid #e0e0e0;
+    color:#ffa000;
+    font-size: 1.2em;
+	margin-bottom: 8px;
+    padding: 0.2em;
+	line-height: 1.5;
+}
+
+.menu .menu_list li a {
+    display: block;
+    font-weight: bold;
+    color: #ff9900;
+    padding: 5px;
+    text-decoration: none;
+}
+.menu .menu_list li a:hover,
+.menu .menu_list li a:active {
+    color: #ff6600;
+}
+.menu .menu_list li a:visited {
+    color: #ff9900;
+}

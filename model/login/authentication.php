@@ -12,8 +12,12 @@ $user = Sentinel::authenticate($credentials);
 
 // 認証に成功した場合
 if ($user !== false) {
+    // ログインユーザ情報を取得
+    $USER_INFO = $user;
+
     $smarty->assign('PAGE_TITLE', "メニュー");
     $smarty->assign('CSS_FILE_NAME', "menu");
+    $smarty->assign('JS_FILE_NAME', "menu");
     $mainTemplate = $smarty->fetch('menu/menu.tpl');
 
 // 認証に失敗した場合

@@ -12,7 +12,7 @@
         {/if}
         <!-- JavaScript -->
         <script src="/employee/js/vendor/jquery-3.5.1.min.js"></script>
-        {* <script type="text/javascript" src="/employee/js/common.js"></script> *}
+        <script type="text/javascript" src="/employee/js/common.js"></script>
         {if isset($JS_FILE_NAME)}
             <script type="text/javascript" src="/employee/js/{$JS_FILE_NAME}.js"></script>
         {/if}

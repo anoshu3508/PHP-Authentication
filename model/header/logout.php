@@ -2,7 +2,7 @@
 // Import the necessary classes
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 
-// ログイン済の場合は、ログアウト処理を実行
+// ログアウト処理
 if ($USER_INFO !== null) {
     Sentinel::logout($USER_INFO);
     $USER_INFO = null;

@@ -4,7 +4,7 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 // データベース接続に必要な設定値を取得
-if ($_SERVER['SERVER_NAME'] === 'activezero.co.jp') {
+if (strpos($_SERVER['SERVER_NAME'], 'activezero.co.jp') !== false) {
     $dbconf = parse_ini_file(CONFIG . 'database.ini', true)['product'];
 } else {
     $dbconf = parse_ini_file(CONFIG . 'database.ini', true)['develop'];
@@ -71,6 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     require_once MODEL . 'login/authentication.php';
                     break;
                 /****************************************
+                 * ログアウト
+                 ****************************************/ 
+                case 'logout':
+                    require_once MODEL . 'header/logout.php';
+                    break;
+                /****************************************
                  * エラー画面
                  ****************************************/ 
                 default:
@@ -126,4 +132,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+$smarty->assign('USER_INFO', $USER_INFO);
 $smarty->display('common.tpl');
