@@ -6,8 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'IdiormMethodMissingException' => $vendorDir . '/j4mie/idiorm/idiorm.php',
+    'IdiormResultSet' => $vendorDir . '/j4mie/idiorm/idiorm.php',
+    'IdiormString' => $vendorDir . '/j4mie/idiorm/idiorm.php',
+    'IdiormStringException' => $vendorDir . '/j4mie/idiorm/idiorm.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+    'ORM' => $vendorDir . '/j4mie/idiorm/idiorm.php',
     'Smarty' => $vendorDir . '/smarty/smarty/libs/Smarty.class.php',
     'SmartyBC' => $vendorDir . '/smarty/smarty/libs/SmartyBC.class.php',
     'SmartyCompilerException' => $vendorDir . '/smarty/smarty/libs/sysplugins/smartycompilerexception.php',
