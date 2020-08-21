@@ -21,6 +21,9 @@
         {if isset($JS_FILE_NAME)}
             <script type="text/javascript" src="/employee/js/{$JS_FILE_NAME}.js"></script>
         {/if}
+        <script>
+            var CSRF_TOKEN = "{$CSRF_TOKEN}";
+        </script>
     </head>
     <body>
         {include file='parts/header.tpl'}

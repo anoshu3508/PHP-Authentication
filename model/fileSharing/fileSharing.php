@@ -10,13 +10,15 @@ $uploadFileList = ORM::for_table('file_sharing')
         'file_sharing.id',
         'file_sharing.file_name',
         'file_sharing.file_size',
-        'file_sharing.updated_at',
-        'users.last_name'
+        'file_sharing.updated_at'//,
+        // 'users.last_name'
     )
-    ->select_expr(
-        'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d %H:%i")', 'uploaded_at'
-    )
-    ->inner_join(
+    ->select_many_expr([
+        'share_name' => 'CASE WHEN file_sharing.share_all_flag=1 THEN "全員" ELSE users.last_name END',
+        // 'uploaded_at' => 'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d %H:%i")'
+        'uploaded_at' => 'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d")'
+    ])
+    ->left_outer_join(
         'users', ['file_sharing.share_user_id', '=', 'users.id']
     )
     ->where('upload_user_id', $USER_INFO->id)
@@ -29,15 +31,21 @@ $shareFileList = ORM::for_table('file_sharing')
         'file_sharing.file_name',
         'file_sharing.file_size',
         'file_sharing.updated_at',
-        'users.last_name'
+        ['owner_name' => 'users.last_name']
     )
     ->select_expr(
-        'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d %H:%i")', 'uploaded_at'
+        // 'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d %H:%i")', 'uploaded_at'
+        'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d")', 'uploaded_at'
     )
-    ->inner_join(
+    ->left_outer_join(
         'users', ['file_sharing.upload_user_id', '=', 'users.id']
     )
-    ->where('share_user_id', $USER_INFO->id)
+    ->where_any_is([
+        ['share_user_id'  => $USER_INFO->id],
+        ['share_all_flag' => '1', 'upload_user_id' => $USER_INFO->id]
+    ], [
+        'upload_user_id' => '<>'
+    ])
     ->find_many();
 
 $smarty->assign('PAGE_TITLE', "ファイル共有");

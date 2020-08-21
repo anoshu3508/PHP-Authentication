@@ -35,7 +35,7 @@
 }
 
 .file_sharing table thead th {
-    font-size: 1.2em;
+    font-size: 1.05em;
     padding: 5px;
 }
 
@@ -47,7 +47,7 @@
 .file_sharing table tbody td {
     text-align: center;
     color: #000;
-    font-size: 1.0em;
+    font-size: 0.95em;
     word-break: break-all;
 }
 
@@ -60,6 +60,7 @@
 }
 
 .file_sharing table tbody td a {
+    cursor: pointer;
     display: block;
     width: 100%;
     height: 100%;
@@ -72,15 +73,20 @@
 }
 
 .file_sharing .ico_download {
-    display: inline-block;
+    position: relative;
 }
 .file_sharing .ico_download::before {
     content: "";
     background-image: url(/employee/image/icon-download.svg); /*背景画像のパス*/
-    background-size: 70%;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center right;
-    padding-right: 25px;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    width: 12px;
+    height: 12px;
+
 }
 
 .file_sharing .ico_trash::before {
@@ -115,19 +121,32 @@
     }
 }
 
+.file_sharing .file_upload td.share_checkbox label {
+    vertical-align: middle;
+    word-break: keep-all;
+}
+
 .file_sharing .file_upload td.share_selectbox {
     text-align: left;
     width: 70%;
 }
 
-.file_sharing .file_upload td.share_checkbox label {
+.file_sharing .file_upload td.share_selectbox span {
     vertical-align: middle;
-    word-break: keep-all;
 }
-.file_sharing .file_upload td.share_selectbox span,
+
+/*=============================================================================
+ = SumoSelect
+ ============================================================================*/
+ /* 全体 */
 .file_sharing .file_upload td.share_selectbox div.SumoSelect {
     vertical-align: middle;
 }
+/* 「Select All」 */
 .file_sharing .file_upload td.share_selectbox div.SumoSelect p.select-all {
     box-sizing: content-box;
+}
+/* 全選択の文言 */
+.file_sharing .file_upload td.share_selectbox div.SumoSelect .CaptionCont {
+    font-size: 0.9em;
 }

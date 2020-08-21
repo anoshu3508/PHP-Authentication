@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5876fd87749dc444a72168055addac82",
+    "content-hash": "8235f70b69c970e4a21d76fda9556c7e",
     "packages": [
         {
             "name": "apfelbox/php-file-download",
@@ -324,6 +324,45 @@
                 "units"
             ],
             "time": "2018-01-11T10:40:03+00:00"
+        },
+        {
+            "name": "gilbitron/easycsrf",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gilbitron/EasyCSRF.git",
+                "reference": "6927d540193f09621c0fb65140c2963992f5fd6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gilbitron/EasyCSRF/zipball/6927d540193f09621c0fb65140c2963992f5fd6b",
+                "reference": "6927d540193f09621c0fb65140c2963992f5fd6b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasyCSRF\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gilbert Pellegrom",
+                    "email": "gilbert@pellegrom.me"
+                }
+            ],
+            "description": "A simple, standalone CSRF protection library",
+            "time": "2015-03-19T14:44:39+00:00"
         },
         {
             "name": "illuminate/container",
@@ -703,6 +742,60 @@
                 "strings"
             ],
             "time": "2018-01-06T10:00:15+00:00"
+        },
+        {
+            "name": "josantonius/session",
+            "version": "1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Josantonius/PHP-Session.git",
+                "reference": "08b09ad43927d172963d15da29259bcdf90a8f43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Josantonius/PHP-Session/zipball/08b09ad43927d172963d15da29259bcdf90a8f43",
+                "reference": "08b09ad43927d172963d15da29259bcdf90a8f43",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.3 || ^2.8",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^5.7 || ^6.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Josantonius\\Session\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josantonius",
+                    "email": "hello@josantonius.com",
+                    "homepage": "https://josantonius.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library for handling sessions.",
+            "keywords": [
+                "hhvm",
+                "php",
+                "session"
+            ],
+            "time": "2018-05-04T08:30:19+00:00"
         },
         {
             "name": "league/csv",

@@ -51,6 +51,7 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         ),
         'J' => 
         array (
+            'Josantonius\\Session\\' => 20,
             'Josantonius\\File\\' => 17,
         ),
         'I' => 
@@ -60,6 +61,10 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
+        ),
+        'E' => 
+        array (
+            'EasyCSRF\\' => 9,
         ),
         'D' => 
         array (
@@ -146,6 +151,10 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         array (
             0 => __DIR__ . '/..' . '/league/csv/src',
         ),
+        'Josantonius\\Session\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/josantonius/session/src',
+        ),
         'Josantonius\\File\\' => 
         array (
             0 => __DIR__ . '/..' . '/josantonius/file/src',
@@ -169,6 +178,10 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         'Illuminate\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'EasyCSRF\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gilbitron/easycsrf/src',
         ),
         'Doctrine\\Inflector\\' => 
         array (

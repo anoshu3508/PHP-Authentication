@@ -10,6 +10,8 @@
         "j4mie/idiorm": "*",
         "gabrielelana/byte-units": "^0.5",
         "apfelbox/php-file-download": "*",
-        "josantonius/file": "*"
+        "josantonius/file": "*",
+        "josantonius/session": "*",
+        "gilbitron/easycsrf": "~1.0"
     }
 }

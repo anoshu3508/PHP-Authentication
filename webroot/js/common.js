@@ -13,7 +13,8 @@
  */
 function postToAction(action) {
     $('<form/>',{action:"/employee/", method:"post"})
-    .append("<input type='hidden' name='action' value='" + action + "'>")
+    .append('<input type="hidden" name="action" value="' + action + '">')
+    .append('<input type="hidden" name="csrf_token" value="' + CSRF_TOKEN + '">')
     .appendTo($('body'))
     .submit();
 }

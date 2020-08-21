@@ -2,6 +2,12 @@
 // 必要なクラスの読み込み
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use EasyCSRF\NativeSessionProvider;
+use EasyCSRF\EasyCSRF;
+use Josantonius\Session\Session;
+
+// セッション開始
+Session::init();
 
 // データベース接続に必要な設定値を取得
 if (strpos($_SERVER['SERVER_NAME'], 'activezero.co.jp') !== false) {
@@ -48,10 +54,26 @@ if (Sentinel::check()) {
     $USER_INFO = Sentinel::getUser();
 }
 
+// CSRFトークンの発行準備（描画直前に発行）
+$sessionProvider = new NativeSessionProvider();
+$easyCSRF = new EasyCSRF($sessionProvider);
+
 // ----------------------------------------------------------------------------
 // ■ POSTリクエストの場合
 // ----------------------------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // トークンチェック
+    $IS_VALID_TOKEN = true;
+    try {
+        $easyCSRF->check('my_token', filter_input(INPUT_POST, 'csrf_token'));
+    } catch(Exception $e) {
+        $IS_VALID_TOKEN = false;
+    }
+
+    // トークンを発行
+    $CSRF_TOKEN = $easyCSRF->generate('my_token');
+    $smarty->assign('CSRF_TOKEN', $CSRF_TOKEN);
 
     // アクション名を取得
     $action = filter_input(INPUT_POST, 'action');
@@ -135,10 +157,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // アクション名をセッションに格納
+    Session::set('before_action', $action);
+
 // ----------------------------------------------------------------------------
 // ■ GETリクエストの場合
 // ----------------------------------------------------------------------------
 } else {
+    // トークンを発行
+    $CSRF_TOKEN = $easyCSRF->generate('my_token');
+    $smarty->assign('CSRF_TOKEN', $CSRF_TOKEN);
+
     // TODO 管理者機能
     if ($adminFlg) {
         $action = filter_input(INPUT_GET, 'action');
