@@ -10,7 +10,18 @@ if (strpos($_SERVER['SERVER_NAME'], 'activezero.co.jp') !== false) {
     $dbconf = parse_ini_file(CONFIG . 'database.ini', true)['develop'];
 }
 
-// データベース接続
+// 通常のデータベース接続
+$connString  = $dbconf['driver'] . ':';
+$connString .= 'host=' . $dbconf['host'] . ';';
+$connString .= 'dbname=' . $dbconf['database'] . ';';
+$connString .= 'charset=' . $dbconf['charset'];
+ORM::configure([
+    'connection_string' => $connString,
+    'username'          => $dbconf['username'],
+    'password'          => $dbconf['password'],
+]);
+
+// 認証用のデータベース接続
 $capsule = new Capsule();
 $capsule->addConnection($dbconf);
 $capsule->bootEloquent();
@@ -48,11 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // TODO 管理者機能
     if ($adminFlg) {
         switch ($action) {
+            /****************************************
+             * ユーザ登録CSV（管理者機能）
+             ****************************************/ 
             case 'userRegist':
                 require_once MODEL . 'admin/userRegist.php';
                 break;
             default:
-                require_once MODEL . 'error.php';
+                require_once MODEL . 'admin/error.php';
         }
     } else {
         // ----------------------------------------------------------
@@ -69,6 +83,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     break;
                 case 'authentication':
                     require_once MODEL . 'login/authentication.php';
+                    break;
+                /****************************************
+                 * メニュー画面
+                 ****************************************/ 
+                case 'menu':
+                    require_once MODEL . 'menu/menu.php';
+                    break;
+                /****************************************
+                 * ファイル共有画面
+                 ****************************************/ 
+                case 'fileSharing':
+                    require_once MODEL . 'fileSharing/fileSharing.php';
+                    break;
+                case 'uploadShareFile':
+                    require_once MODEL . 'fileSharing/uploadShareFile.php';
+                    break;
+                case 'downloadShareFile':
+                    require_once MODEL . 'fileSharing/downloadShareFile.php';
+                    break;
+                case 'deleteShareFile':
+                    require_once MODEL . 'fileSharing/deleteShareFile.php';
                     break;
                 /****************************************
                  * ログアウト
@@ -94,18 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'authentication':
                     require_once MODEL . 'login/authentication.php';
                     break;
-                /****************************************
-                 * ユーザ登録画面
-                 ****************************************/ 
-                case 'userRegistInput':
-                    require_once MODEL . 'userRegist/input.php';
-                    break;
-                case 'userRegistConfirm':
-                    require_once MODEL . 'userRegist/confirm.php';
-                    break;
-                case 'userRegistComplete':
-                    require_once MODEL . 'userRegist/complete.php';
-                    break;
                 default:
                     require_once MODEL . 'login/login.php';
             }
@@ -123,8 +146,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case 'userRegist':
                 require_once MODEL . 'admin/userRegist.php';
                 break;
+            case 'exit':
+                require_once MODEL . 'admin/exit.php';
             default:
-                require_once MODEL . 'login/login.php';
+                require_once MODEL . 'admin/top.php';
         }
     } else {
         // ログイン画面を表示

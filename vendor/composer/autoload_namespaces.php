@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Skyzyx\\Components\\Mimetypes' => array($vendorDir . '/skyzyx/mimetypes/src'),
 );

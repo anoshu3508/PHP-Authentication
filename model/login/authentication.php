@@ -8,7 +8,7 @@ $credentials = [
 ];
 
 // 認証処理
-$user = Sentinel::authenticate($credentials);
+$user = Sentinel::authenticateAndRemember($credentials);
 
 // 認証に成功した場合
 if ($user !== false) {

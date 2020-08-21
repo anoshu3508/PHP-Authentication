@@ -6,9 +6,10 @@ require dirname(__DIR__) . '/config/paths.php';
 require VENDOR . 'autoload.php';
 
 $smarty = new Smarty();
-$smarty->template_dir = TEMPLATES;
-$smarty->compile_dir = TEMPLATES_COMPILE;
-$smarty->config_dir = CONFIG;
-$smarty->cache_dir = CACHE;
+$smarty->setTemplateDir(TEMPLATES);
+$smarty->setCompileDir(TEMPLATES_COMPILE);
+$smarty->setConfigDir(CONFIG);
+$smarty->setCacheDir(CACHE);
+$smarty->setPluginsDir(PLUGINS);
 
 require MODEL . 'common.php';

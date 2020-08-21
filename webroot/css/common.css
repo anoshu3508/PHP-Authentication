@@ -1,4 +1,3 @@
-
 /* Google Web Fonts */
 @import url(/employee/css/vendor/google/opensans.css);
 
@@ -7,6 +6,12 @@
 [class*="fontawesome-"]:before {
     font-family: 'FontAwesome', sans-serif;
 }
+
+/* Remodal */
+/*
+@import url(/employee/css/vendor/remodal/remodal.css);
+@import url(/employee/css/vendor/remodal/remodal-default-theme.css);
+*/
 
 /*=============================================================================
  = Simple Reset
@@ -30,6 +35,15 @@ h1 {
     text-align: center;
     padding: 1em 0;
 }
+
+h2 {
+    padding: 0.3em;/*文字周りの余白*/
+    margin: 8px 0;
+    color: #494949;/*文字色*/
+    background: #fffaf4;/*背景色*/
+    border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
+    font-size: 1.2em;
+  }
 
 form {
     padding: 0 1.5em;
@@ -55,6 +69,10 @@ header {
     position: relative;
 }
 
+.header-wrapper .header-menu {
+    margin: 0 14px 0 20px;
+}
+
 .header-wrapper .header-logout {
     position: absolute;
     top: 50%;
@@ -62,7 +80,27 @@ header {
     transform: translateY(-50%);
 }
 
-.header-wrapper .header-logout .btn-square-pop {
+/*=============================================================================
+ = footer
+ ============================================================================*/
+.footer-wrapper {
+    /* empty */
+}
+
+/*=============================================================================
+ = common
+ ============================================================================*/
+
+.flex{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+
+/* 立体ボタン */
+.btn-square-pop {
     position: relative;
     display: inline-block;
     padding: 0.25em 0.5em;
@@ -73,9 +111,8 @@ header {
     border-radius: 4px;/*角の丸み*/
     box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
     font-weight: bold;
-  }
-  
-.header-wrapper .header-logout .btn-square-pop:active {
+}
+.btn-square-pop:active {
     border-bottom: solid 2px #fd9535;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
@@ -84,12 +121,5 @@ header {
  = main
  ============================================================================*/
 .main-wrapper {
-    margin: 50px auto 1.5em;
-}
-
-/*=============================================================================
- = footer
- ============================================================================*/
-.footer-wrapper {
-    /* empty */
+    margin: 50px 5px 10px;
 }

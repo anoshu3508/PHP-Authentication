@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // ファイルアップロード
-        $filepath = uploadUserRegistCsvFile($_FILES['csv_file']);
+        $filePath = uploadUserRegistCsvFile($_FILES['csv_file']);
         // CSVファイル読み込み
-        $csvRecords = readUserRegistCsvFile($filepath);
+        $csvRecords = readUserRegistCsvFile($filePath);
 
         // ユーザの登録・更新・削除
         $newUserCount = 0;
@@ -25,14 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $deleteUserCount = 0;
         $skipUserCount = 0;
         foreach ($csvRecords as $idx => $row) {
-            $credentials = [
-                'email' => $row['email'],
-                'password' => $row['password']
-            ];
+            // ユーザ情報を取得
+            $userInfo['email'] = $row['email'];
+            if (!empty($row['password'])) {
+                $userInfo['password'] = $row['password'];
+            }
+            if (!empty($row['last_name'])) {
+                $userInfo['last_name'] = $row['last_name'];
+            }
+            if (!empty($row['first_name'])) {
+                $userInfo['first_name'] = $row['first_name'];
+            }
 
             // 登録済みかを確認
             $userObj = Sentinel::getUserRepository();
-            $user = $userObj->findByCredentials($credentials);
+            $user = $userObj->findByCredentials([
+                'login' => $userInfo['email']
+            ]);
+
+            // 処理区分別に処理
             switch ($row['category']) {
                 // 新規
                 case 'ADD':
@@ -44,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     } else { 
                         // 存在しない場合は新規登録
                         $newUserCount++;
-                        $user = Sentinel::registerAndActivate($credentials);
+                        $user = Sentinel::registerAndActivate($userInfo);
                     }
                     break; 
                 // 更新
@@ -52,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if ($user !== null) {
                         // 存在する場合は更新
                         $updateUserCount++;
-                        $user = $userObj->update($user, $credentials);
+                        $user = $userObj->update($user, $userInfo);
                     } else { 
                         // 存在しない場合はスキップ
                         $skipUserCount++;
@@ -137,7 +148,7 @@ function uploadUserRegistCsvFile($csvFile) {
     $handle->no_script = false;      // テキストファイルに変換するか
 
     // 格納先ディレクトリを取得
-    $directory = WORK . 'userRegist/' . date('Y') . '/' . date('m');
+    $directory = WORK . 'userRegist' . DS . date('Y') . '/' . date('m');
 
     // アップロードファイルのチェック
     if ($handle->uploaded) {
@@ -160,12 +171,12 @@ function uploadUserRegistCsvFile($csvFile) {
 /**
  * CSVファイル読み込み
  * 
- * @param $filepath ファイルパス
+ * @param $filePath ファイルパス
  * @return CSVレコード
  */
-function readUserRegistCsvFile($filepath) {
+function readUserRegistCsvFile($filePath) {
     // CSVファイルを指定
-    $csvFile = Reader::createFromPath($filepath, 'r');
+    $csvFile = Reader::createFromPath($filePath, 'r');
 
     // 文字エンコードを指定(SJIS-win -> UTF-8)
     CharsetConverter::addTo($csvFile, 'SJIS-win', 'UTF-8');
@@ -182,76 +193,102 @@ function readUserRegistCsvFile($filepath) {
     // ヘッダーがない場合は例外をスロー
     if (
         $csvHeader[0] !== 'category'
-        || $csvHeader[1] !== 'email'
-        || $csvHeader[2] !== 'password'
+        || (!isset($csvHeader[1]) || $csvHeader[1] !== 'email')
+        || (!isset($csvHeader[2]) || $csvHeader[2] !== 'password')
+        || (!isset($csvHeader[3]) || $csvHeader[3] !== 'last_name')
+        || (!isset($csvHeader[4]) || $csvHeader[4] !== 'first_name')
     ) {
-        $csvErrorFlg = true;
-        $errorMsg .= '1行目にヘッダーを入力してください。（1列目=category, 2列目=email, 3列目=password）<br/>';
+        $errorMsg .= '1行目にヘッダーを入力してください。（1列目=category, 2列目=email, 3列目=password, 4列目=last_name, 3列目=first_name）<br/>';
         throw new Exception($errorMsg);
     }
 
-    // バリデーションを実行
-    $csvErrorFlg = false;
+    // バリデーションを実行し、エラーがある場合は例外をスロー
+    if (!validateUserRegistCsvFile($csvRecords, $errorMsg)) {
+        throw new Exception($errorMsg);
+    }
+
+    return $csvRecords;
+}
+
+/**
+ * CSVファイルのバリデーション
+ * 
+ * @param $csvRecords ファイルパス
+ * @param &$errorMsg エラーメッセージ（参照渡し）
+ * @return バリデーション結果
+ */
+function validateUserRegistCsvFile($csvRecords, &$errorMsg) {
+    $csvValidFlg = true;
+
+    // レコード毎に処理
     foreach ($csvRecords as $idx => $row) {
         // 処理区分の未入力チェック
-        if (!isset($row['category']) || $row['category'] === '') {
-            $csvErrorFlg = true;
+        if (empty($row['category'])) {
+            $csvValidFlg = false;
             $errorMsg .= '処理区分が入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
             continue;
         }
         // メールアドレスの未入力チェック
-        if (!isset($row['email']) || $row['email'] === '') {
-            $csvErrorFlg = true;
+        if (empty($row['email'])) {
+            $csvValidFlg = false;
             $errorMsg .= 'メールアドレスが入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
             continue;
         }
-        // パスワードの未入力チェック（削除の場合は不要）
-        if (
-            $row['category'] !== 'DELETE'
-            && (
-                !isset($row['password'])
-                || $row['password'] === ''
-            )
-        ) {
-            $csvErrorFlg = true;
-            $errorMsg .= 'パスワードが入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
-            continue;
+    
+        // 新規の場合のチェック
+        if ($row['category'] === 'ADD') {
+            // パスワードの未入力チェック（新規のみ必須）
+            if (empty($row['password'])) {
+                $csvValidFlg = false;
+                $errorMsg .= 'パスワードが入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
+                continue;
+            }
+            // 姓の未入力チェック（新規のみ必須）
+            if (empty($row['last_name'])) {
+                $csvValidFlg = false;
+                $errorMsg .= '名が入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
+                continue;
+            }
+            // 名の未入力チェック（新規のみ必須）
+            if (empty($row['first_name'])) {
+                $csvValidFlg = false;
+                $errorMsg .= '姓が入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
+                continue;
+            }
         }
 
         // 処理区分の形式チェック
         $catPattern = "/^ADD|EDIT|DELETE$/";
         if (!preg_match($catPattern, $row['category'])) {
-            $csvErrorFlg = true;
+            $csvValidFlg = false;
             $errorMsg .= '処理区分は ADD, EDIT, DELETE のいずれかを使用して下さい。（行番号:' . ($idx + 1) . ', 値:' . $row['password'] . '）<br/>';
         }
 
         // メールアドレスの形式チェック
         $emailPattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
         if (!preg_match($emailPattern, $row['email'])) {
-            $csvErrorFlg = true;
+            $csvValidFlg = false;
             $errorMsg .= 'メールアドレスの形式が不正です（行番号:' . ($idx + 1) . ', 値:' . $row['email'] . '）<br/>';
         } else {
             // アクティブゼロドメイン以外のメールアドレスは許容しない
             $azDomainPattern = "/@activezero.co.jp$/";
             if (!preg_match($azDomainPattern, $row['email'])) {
-                $csvErrorFlg = true;
+                $csvValidFlg = false;
                 $errorMsg .= 'AZ以外のメールアドレスは登録できません。（行番号:' . ($idx + 1) . ', 値:' . $row['email'] . '）<br/>';
             }
         }
 
         // パスワードの形式チェック（削除の場合は不要）
         $pwPattern = '/^[!-~]{8,100}+$/';
-        if ($row['category'] !== 'DELETE' && !preg_match($pwPattern, $row['password'])) {
-            $csvErrorFlg = true;
+        if (
+            $row['category'] !== 'DELETE'
+            && !empty($row['password'])
+            && !preg_match($pwPattern, $row['password'])
+        ) {
+            $csvValidFlg = false;
             $errorMsg .= 'パスワードは8～100文字の半角英数記号を使用して下さい。（行番号:' . ($idx + 1) . ', 値:' . $row['password'] . '）<br/>';
         }
-
     }
 
-    // エラーがある場合は例外をスロー
-    if ($csvErrorFlg) {
-        throw new Exception($errorMsg);
-    }
-
-    return $csvRecords;
+    return $csvValidFlg;
 }

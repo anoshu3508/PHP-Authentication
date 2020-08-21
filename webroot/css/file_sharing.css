@@ -1,0 +1,133 @@
+.file_sharing section {
+    width: 600px;
+    margin: 5px auto 50px;
+}
+@media screen and (max-width: 610px) {
+    .file_sharing section {
+        width: 100%;
+    }
+}
+
+.file_sharing table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 320px;
+    box-shadow: 0 0 15px -6px #00000073;
+}
+
+.file_sharing table tr {
+    background-color: #fff;
+}
+.file_sharing table tr:nth-child(even){
+    background-color: #eee;
+}
+
+.file_sharing table tbody tr:hover {
+    background-color: #fffae9;
+}
+
+.file_sharing table th,
+.file_sharing table td {
+    padding: .35em 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.file_sharing table thead th {
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+.file_sharing table thead tr {
+    background-color: #FFC107;
+    color:#fff;
+}
+
+.file_sharing table tbody td {
+    text-align: center;
+    color: #000;
+    font-size: 1.0em;
+    word-break: break-all;
+}
+
+.file_sharing table tbody td.share_file_name {
+    text-align: left;
+}
+
+.file_sharing table tbody td.delete_button {
+    padding: 0;
+}
+
+.file_sharing table tbody td a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.file_sharing .message {
+    text-align: center;
+    color: #f00;
+    font-weight: bold;
+}
+
+.file_sharing .ico_download {
+    display: inline-block;
+}
+.file_sharing .ico_download::before {
+    content: "";
+    background-image: url(/employee/image/icon-download.svg); /*背景画像のパス*/
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 25px;
+}
+
+.file_sharing .ico_trash::before {
+    content: "";
+    background-image: url(/employee/image/icon-trash.svg); /*背景画像のパス*/
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+/* ファイルアップロード */
+.file_sharing .file_upload form {
+    padding: 0;
+}
+
+.file_sharing .file_upload input[type="checkbox"] {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.file_sharing .file_upload input[type="button"] {
+    width: 50px;
+}
+
+.file_sharing .file_upload td.share_checkbox {
+    text-align: left;
+    width: 30%;
+}
+@media screen and (max-width: 400px) {
+    .file_sharing .file_upload td.share_checkbox {
+        min-width: 120px;
+    }
+}
+
+.file_sharing .file_upload td.share_selectbox {
+    text-align: left;
+    width: 70%;
+}
+
+.file_sharing .file_upload td.share_checkbox label {
+    vertical-align: middle;
+    word-break: keep-all;
+}
+.file_sharing .file_upload td.share_selectbox span,
+.file_sharing .file_upload td.share_selectbox div.SumoSelect {
+    vertical-align: middle;
+}
+.file_sharing .file_upload td.share_selectbox div.SumoSelect p.select-all {
+    box-sizing: content-box;
+}

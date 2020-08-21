@@ -16,6 +16,7 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        'f79e58dc028ebda1a58ef6c5228534ea' => __DIR__ . '/..' . '/gabrielelana/byte-units/src/ByteUnits/functions.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
     );
 
@@ -48,6 +49,10 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         array (
             'League\\Csv\\' => 11,
         ),
+        'J' => 
+        array (
+            'Josantonius\\File\\' => 17,
+        ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
@@ -65,6 +70,14 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
             'Cartalyst\\Support\\' => 18,
             'Cartalyst\\Sentinel\\' => 19,
             'Carbon\\' => 7,
+        ),
+        'B' => 
+        array (
+            'ByteUnits\\' => 10,
+        ),
+        'A' => 
+        array (
+            'Apfelbox\\FileDownload\\' => 22,
         ),
     );
 
@@ -133,6 +146,10 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         array (
             0 => __DIR__ . '/..' . '/league/csv/src',
         ),
+        'Josantonius\\File\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/josantonius/file/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/support',
@@ -168,6 +185,24 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
+        'ByteUnits\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gabrielelana/byte-units/src/ByteUnits',
+        ),
+        'Apfelbox\\FileDownload\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apfelbox/php-file-download/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Skyzyx\\Components\\Mimetypes' => 
+            array (
+                0 => __DIR__ . '/..' . '/skyzyx/mimetypes/src',
+            ),
         ),
     );
 
@@ -363,6 +398,7 @@ class ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit2885a2cc9ec1db857fec580fc1d82f72::$classMap;
 
         }, null, ClassLoader::class);

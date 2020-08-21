@@ -22,6 +22,7 @@ return array(
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'League\\Csv\\' => array($vendorDir . '/league/csv/src'),
+    'Josantonius\\File\\' => array($vendorDir . '/josantonius/file/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/illuminate/support'),
     'Illuminate\\Events\\' => array($vendorDir . '/illuminate/events'),
     'Illuminate\\Database\\' => array($vendorDir . '/illuminate/database'),
@@ -31,4 +32,6 @@ return array(
     'Cartalyst\\Support\\' => array($vendorDir . '/cartalyst/support/src'),
     'Cartalyst\\Sentinel\\' => array($vendorDir . '/cartalyst/sentinel/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
+    'ByteUnits\\' => array($vendorDir . '/gabrielelana/byte-units/src/ByteUnits'),
+    'Apfelbox\\FileDownload\\' => array($vendorDir . '/apfelbox/php-file-download/src'),
 );
