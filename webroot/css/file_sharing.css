@@ -66,7 +66,13 @@
     height: 100%;
 }
 
-.file_sharing .message {
+.file_sharing .success_message {
+    text-align: center;
+    color: #00c821;
+    font-weight: bold;
+}
+
+.file_sharing .error_message {
     text-align: center;
     color: #f00;
     font-weight: bold;
@@ -122,6 +128,8 @@
 }
 
 .file_sharing .file_upload td.share_checkbox label {
+    display: inline-block;
+    min-width: 90px;
     vertical-align: middle;
     word-break: keep-all;
 }

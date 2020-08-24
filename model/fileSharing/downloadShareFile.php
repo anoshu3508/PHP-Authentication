@@ -3,6 +3,7 @@ use Apfelbox\FileDownload\FileDownload;
 use Josantonius\File\File;
 
 $message = '';
+$errorFlag = false;
 try {
     // ファイルIDを取得
     $fileId = filter_input(INPUT_POST, 'file_id');
@@ -43,9 +44,11 @@ try {
     $fileDownload->sendDownload($downloadFileInfo->file_name);
 } catch (Exception $e) {
     $message = $e->getMessage();
+    $errorFlag = true;
 }
 
 $smarty->assign('message', $message);
+$smarty->assign('errorFlag', $errorFlag);
 
 // ファイル共有画面の表示処理
 require_once 'fileSharing.php';

@@ -3,27 +3,34 @@ use Verot\Upload\Upload;
 use Josantonius\Session\Session;
 
 $message = '';
+$errorFlag = false;
 try {
     // トークンが無効な場合はエラー
     // ※ 直前のアクションがダウンロード処理の場合はチェック無視
     if (Session::get('before_action') !== 'downloadShareFile' && !$IS_VALID_TOKEN) {
-        throw new Exception("再読み込みによるアップロードは無効です。");
+        throw new Exception("再読み込みによる操作は無効です。");
     }
 
     // 共有者ID、全共有フラグを取得
     $shareUserIds = filter_input(INPUT_POST, 'share_user_id', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
     $shareAllFlag = filter_input(INPUT_POST, 'share_all_flag');
+    $privateFlag = filter_input(INPUT_POST, 'private_flag');
 
     // 共有者が選択されていない場合はエラー
-    if (!isset($shareUserIds) && !isset($shareAllFlag)) {
+    if (!isset($shareUserIds) && !isset($shareAllFlag) && !isset($privateFlag)) {
         throw new Exception("共有する人を選択してください。");
+    }
+
+    // 共有者が自分の場合
+    if (isset($shareUserIds) && in_array((int)$USER_INFO->id, $shareUserIds)) {
+        throw new Exception("共有する人に自分は選択できません。");
     }
 
     // ファイルアップロード
     $filePath = uploadShareFile($_FILES['share_file'], $USER_INFO->id);
     $fileSize = $_FILES['share_file']['size'];
 
-    // 全共有フラグが 1 の場合
+    // 全員共有の場合
     if ($shareAllFlag === '1') {
         $fileSharing = ORM::for_table('file_sharing')->create();
         $fileSharing->file_name = basename($filePath);
@@ -32,7 +39,16 @@ try {
         $fileSharing->share_all_flag = $shareAllFlag;
         $fileSharing->save();
 
-    // 全共有フラグが 0 の場合
+    // 非公開の場合
+    } elseif ($privateFlag) {
+        $fileSharing = ORM::for_table('file_sharing')->create();
+        $fileSharing->file_name = basename($filePath);
+        $fileSharing->file_size = $fileSize;
+        $fileSharing->upload_user_id = $USER_INFO->id;
+        $fileSharing->share_user_id = null;
+        $fileSharing->save();
+
+    // 個別共有の場合
     } else {
         // 共有者ID毎にDBに登録
         foreach ($shareUserIds as $suId) {
@@ -48,9 +64,11 @@ try {
     $message = 'アップロードが完了しました。';
 } catch (Exception $e) {
     $message = $e->getMessage();
+    $errorFlag = true;
 }
 
 $smarty->assign('message', $message);
+$smarty->assign('errorFlag', $errorFlag);
 
 // ファイル共有画面の表示処理
 require_once 'fileSharing.php';

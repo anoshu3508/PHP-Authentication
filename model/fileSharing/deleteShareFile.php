@@ -3,6 +3,7 @@ use Josantonius\File\File;
 use Josantonius\Session\Session;
 
 $message = '';
+$errorFlag = false;
 try {
     // トランザクション開始
     ORM::get_db()->beginTransaction();
@@ -10,7 +11,7 @@ try {
     // トークンが無効な場合はエラー
     // ※ 直前のアクションがダウンロード処理の場合はチェック無視
     if (Session::get('before_action') !== 'downloadShareFile' && !$IS_VALID_TOKEN) {
-        throw new Exception("再読み込みによる削除は無効です。");
+        throw new Exception("再読み込みによる操作は無効です。");
     }
 
     // ファイルIDを取得
@@ -50,9 +51,11 @@ try {
     // ロールバック
     ORM::get_db()->rollBack();
     $message = $e->getMessage();
+    $errorFlag = true;
 }
 
 $smarty->assign('message', $message);
+$smarty->assign('errorFlag', $errorFlag);
 
 // ファイル共有画面の表示処理
 require_once 'fileSharing.php';

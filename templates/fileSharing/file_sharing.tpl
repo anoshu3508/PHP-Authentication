@@ -3,7 +3,11 @@
             <h1>ファイル共有</h1>
 
             {if isset($message)}
-                <p class="message">{$message}</p>
+                {if $errorFlag}
+                    <p class="error_message">{$message}</p>
+                {else}
+                    <p class="success_message">{$message}</p>
+                {/if}
             {/if}
 
             <section class="file_upload">
@@ -24,11 +28,14 @@
                                     <label for="share_all_flag">
                                         <input type="checkbox" name="share_all_flag" value="1" id="share_all_flag" />全員に共有
                                     </label>
+                                    <br />
+                                    <label for="private_flag">
+                                        <input type="checkbox" name="private_flag" value="1" id="private_flag" />非公開
+                                    </label>
                                 </td>
                                 <td class="share_selectbox">
                                     <span>共有する人（複数選択可）</span>
                                     <select name="share_user_id[]" multiple="multiple" placeholder="選択してください">
-                                        {* <option value="{$USER_INFO.id}">非公開</option> *}
                                         {foreach from=$userList item=user}
                                             <option value="{$user.id}">{$user.last_name} {$user.first_name}</option>
                                         {/foreach}

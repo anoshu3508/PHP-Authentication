@@ -1,18 +1,57 @@
 $(function() {
+    /**
+     * 「全員に共有」チェックボックス
+     */
+    $('.share_checkbox #share_all_flag').change(function() {
+        if ($('.share_checkbox #private_flag').prop('checked')) {
+            $('.share_checkbox #private_flag').prop('checked', false);
+        }
+    });
+    /**
+     * 「非公開」チェックボックス
+     */
+    $('.share_checkbox #private_flag').change(function() {
+        if ($('.share_checkbox #share_all_flag').prop('checked')) {
+            $('.share_checkbox #share_all_flag').prop('checked', false);
+        }
+    });
+
+    /**
+     * 「共有する人」セレクトボックス
+     */
     $('.share_selectbox select').SumoSelect({
         csvDispCount: 2,
         selectAll: true,
         okCancelInMulti: true,
-        captionFormatAllSelected: "※全員に共有する場合は<br/>「全員に共有」を<br/>チェックしてください" 
+        captionFormatAllSelected: "全員に共有" 
+    });
+    $('.share_selectbox select').change(function() {
+        // チェックボックスをオフ
+        if ($('.share_checkbox #share_all_flag').prop('checked')) {
+            $('.share_checkbox #share_all_flag').prop('checked', false);
+        }
+        if ($('.share_checkbox #private_flag').prop('checked')) {
+            $('.share_checkbox #private_flag').prop('checked', false);
+        }
+        // 全選択の場合「全員に共有」チェックボックスをオン
+        var optLength = $(this).children('option').length;
+        var selectedLength = $(this).children('option:selected').length;
+        if (optLength == selectedLength) {
+            $('.share_checkbox #share_all_flag').prop('checked', true);
+        }
+
     });
 
+    /**
+     * 削除ボタン
+     */
     $('.delete_button').click(function() {
         $('input[name="delete_file_name"]').val($(this).find('a').attr('data-delete-file-name'));
     });
-    // $(document).on('click', '.delete_button', function() {
-    //     $('input[name="delete_file_name"]').val($(this).attr('data-delete-file-name'));
-    // });
-    
+
+    /**
+     * 削除モーダルウィンドウ
+     */
     $(document).on('confirmation', '.remodal', function() {
         var deleteFileName = $('input[name="delete_file_name"]').val();
         if (deleteFileName == '') {
@@ -21,15 +60,6 @@ $(function() {
         }
         postToDeleteShareFile(deleteFileName);
     });
-    
-    /**
-     * 「ファイルのアップロード」を実行
-     * 
-     * @return {undefined}
-     */
-    // function postToUploadShareFile() {
-    //     postToAction('uploadShareFile');
-    // }
 })
     
 /**

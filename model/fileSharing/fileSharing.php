@@ -10,11 +10,18 @@ $uploadFileList = ORM::for_table('file_sharing')
         'file_sharing.id',
         'file_sharing.file_name',
         'file_sharing.file_size',
+        'file_sharing.upload_user_id',
         'file_sharing.updated_at'//,
         // 'users.last_name'
     )
     ->select_many_expr([
-        'share_name' => 'CASE WHEN file_sharing.share_all_flag=1 THEN "全員" ELSE users.last_name END',
+        'share_name' => '
+            CASE
+                WHEN file_sharing.share_all_flag = 1 THEN "全員"
+                WHEN file_sharing.share_user_id IS NULL THEN "非公開"
+                ELSE GROUP_CONCAT(users.last_name separator "<br/>")
+            END
+        ',
         // 'uploaded_at' => 'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d %H:%i")'
         'uploaded_at' => 'DATE_FORMAT(file_sharing.updated_at, "%Y/%m/%d")'
     ])
@@ -22,6 +29,10 @@ $uploadFileList = ORM::for_table('file_sharing')
         'users', ['file_sharing.share_user_id', '=', 'users.id']
     )
     ->where('upload_user_id', $USER_INFO->id)
+    ->group_by([
+        'file_sharing.file_name',
+        'file_sharing.upload_user_id'
+    ])
     ->find_many();
 
 // 共有ファイル一覧を取得
