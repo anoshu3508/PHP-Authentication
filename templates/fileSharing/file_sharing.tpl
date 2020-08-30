@@ -35,7 +35,7 @@
                                 </td>
                                 <td class="share_selectbox">
                                     <span>共有する人（複数選択可）</span>
-                                    <select name="share_user_id[]" multiple="multiple" placeholder="選択してください">
+                                    <select name="share_user_id[]" multiple="multiple" id="share_user_id" placeholder="選択してください">
                                         {foreach from=$userList item=user}
                                             <option value="{$user.id}">{$user.last_name} {$user.first_name}</option>
                                         {/foreach}
@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <input type="file" name="share_file" />
+                                    <input type="file" name="share_file" id="share_file" />
                                     <input type="submit" value="送信" />
                                 </td>
                             </tr>

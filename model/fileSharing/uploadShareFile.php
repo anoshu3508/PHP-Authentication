@@ -28,12 +28,17 @@ try {
 
     // ファイルアップロード
     $filePath = uploadShareFile($_FILES['share_file'], $USER_INFO->id);
+
+    // ファイル名、ファイルサイズを取得
+    // ※ basename() と pathinfo() で不具合有。そのため explode() でファイル名を取得
+    $filePathArr = explode(DS, $filePath);
+    $fileName = array_pop($filePathArr);
     $fileSize = $_FILES['share_file']['size'];
 
     // 全員共有の場合
     if ($shareAllFlag === '1') {
         $fileSharing = ORM::for_table('file_sharing')->create();
-        $fileSharing->file_name = basename($filePath);
+        $fileSharing->file_name = $fileName;
         $fileSharing->file_size = $fileSize;
         $fileSharing->upload_user_id = $USER_INFO->id;
         $fileSharing->share_all_flag = $shareAllFlag;
@@ -42,7 +47,7 @@ try {
     // 非公開の場合
     } elseif ($privateFlag) {
         $fileSharing = ORM::for_table('file_sharing')->create();
-        $fileSharing->file_name = basename($filePath);
+        $fileSharing->file_name = $fileName;
         $fileSharing->file_size = $fileSize;
         $fileSharing->upload_user_id = $USER_INFO->id;
         $fileSharing->share_user_id = null;
@@ -53,7 +58,7 @@ try {
         // 共有者ID毎にDBに登録
         foreach ($shareUserIds as $suId) {
             $fileSharing = ORM::for_table('file_sharing')->create();
-            $fileSharing->file_name = basename($filePath);
+            $fileSharing->file_name = $fileName;
             $fileSharing->file_size = $fileSize;
             $fileSharing->upload_user_id = $USER_INFO->id;
             $fileSharing->share_user_id = $suId;
@@ -98,6 +103,7 @@ function uploadShareFile($file, $userId) {
 
     // アップロードの設定
     $handle->dir_chmod = 0755;       // ディレクトリが書き込めない場合に変更する属性
+    $handle->mime_check = false;     // MIMEをチェックするか
     $handle->no_script = false;      // テキストファイルに変換するか
 
     // 格納先ディレクトリを取得

@@ -40,7 +40,7 @@ try {
 
     // ファイルが存在しない場合はエラー
     if (!File::delete($filePath)) {
-        throw new Exception('ファイルの削除に失敗しました。');
+        throw new Exception('ファイルの削除に失敗しました。対象ファイルが存在しません。');
     }
 
     // コミット
