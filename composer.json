@@ -12,6 +12,8 @@
         "apfelbox/php-file-download": "*",
         "josantonius/file": "*",
         "josantonius/session": "*",
-        "gilbitron/easycsrf": "~1.0"
+        "gilbitron/easycsrf": "~1.0",
+        "phpoffice/phpspreadsheet": "~1.14",
+        "japanese-holiday/japanese-holiday": "~2.0"
     }
 }
