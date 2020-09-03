@@ -33,6 +33,7 @@ $uploadFileList = ORM::for_table('file_sharing')
         'file_sharing.file_name',
         'file_sharing.upload_user_id'
     ])
+    ->order_by_desc('file_sharing.id')
     ->find_many();
 
 // 共有ファイル一覧を取得
@@ -57,12 +58,11 @@ $shareFileList = ORM::for_table('file_sharing')
     ], [
         'upload_user_id' => '<>'
     ])
+    ->order_by_desc('file_sharing.id')
     ->find_many();
 
 $smarty->assign('PAGE_TITLE', "ファイル共有");
 $smarty->assign('CSS_FILE_NAME', "file_sharing");
 $smarty->assign('JS_FILE_NAME', "file_sharing");
-$smarty->assign('userList', $userList);
-$smarty->assign('uploadFileList', $uploadFileList);
-$smarty->assign('shareFileList', $shareFileList);
+$smarty->assign(compact('userList', 'uploadFileList', 'shareFileList'));
 $smarty->assign('MAIN_HTML', $smarty->fetch('fileSharing/file_sharing.tpl'));

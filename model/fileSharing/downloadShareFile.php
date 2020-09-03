@@ -47,8 +47,7 @@ try {
     $errorFlag = true;
 }
 
-$smarty->assign('message', $message);
-$smarty->assign('errorFlag', $errorFlag);
+$smarty->assign(compact('message', 'errorFlag'));
 
 // ファイル共有画面の表示処理
 require_once 'fileSharing.php';

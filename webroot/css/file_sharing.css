@@ -1,11 +1,8 @@
 .file_sharing section {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
+    min-width: 310px;
     margin: 5px auto 50px;
-}
-@media screen and (max-width: 610px) {
-    .file_sharing section {
-        width: 100%;
-    }
 }
 
 .file_sharing table {
@@ -13,7 +10,6 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    min-width: 320px;
     box-shadow: 0 0 15px -6px #00000073;
 }
 
@@ -37,6 +33,7 @@
 .file_sharing table thead th {
     font-size: 1.05em;
     padding: 5px;
+    text-align: center;
 }
 
 .file_sharing table thead tr {
@@ -104,13 +101,9 @@
 }
 
 /* ファイルアップロード */
-.file_sharing .file_upload form {
-    padding: 0;
-}
-
 .file_sharing .file_upload input[type="checkbox"] {
     vertical-align: middle;
-    margin-right: 5px;
+    margin: 0 5px 0 0;
 }
 
 .file_sharing .file_upload input[type="button"] {
@@ -121,14 +114,10 @@
     text-align: left;
     width: 30%;
 }
-@media screen and (max-width: 400px) {
-    .file_sharing .file_upload td.share_checkbox {
-        min-width: 120px;
-    }
-}
 
 .file_sharing .file_upload td.share_checkbox label {
     display: inline-block;
+    margin: 0;
     min-width: 90px;
     vertical-align: middle;
     word-break: keep-all;
@@ -143,12 +132,35 @@
     vertical-align: middle;
 }
 
+.file_sharing .file_upload td.share_file_select input[type="file"] {
+    width: 260px;
+}
+.file_sharing .file_upload td.share_file_select input[type="submit"] {
+    width: 50px;
+}
+@media screen and (max-width: 410px) {
+    .file_sharing .file_upload td.share_file_select input[type="file"] {
+        width: 70%;
+        max-width: 260px;
+    }
+    .file_sharing .file_upload td.share_file_select input[type="submit"] {
+        width: calc(30% - 10px);
+        max-width: 50px;
+    }
+}
+
 /*=============================================================================
  = SumoSelect
  ============================================================================*/
  /* 全体 */
 .file_sharing .file_upload td.share_selectbox div.SumoSelect {
     vertical-align: middle;
+}
+@media screen and (max-width: 410px) {
+    .file_sharing .file_upload td.share_selectbox div.SumoSelect {
+        max-width: 200px;
+        width: 100%;
+    }
 }
 /* 「Select All」 */
 .file_sharing .file_upload td.share_selectbox div.SumoSelect p.select-all {

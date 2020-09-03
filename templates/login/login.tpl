@@ -12,11 +12,9 @@
                         </div>
                     {/if}
                     <div class="form-item">
-                        <label for="email"></label>
                         <input type="email" name="email" required="required" placeholder="メールアドレス"></input>
                     </div>
                     <div class="form-item">
-                        <label for="password"></label>
                         <input type="password" name="password" required="required" placeholder="パスワード"></input>
                     </div>
                     <div class="button-panel">

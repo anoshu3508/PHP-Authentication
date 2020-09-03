@@ -112,11 +112,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // メッセージを画面に追加
-    $smarty->assign('message', $message);
+    $smarty->assign(compact('message'));
 }
 
 $smarty->assign('PAGE_TITLE', "ユーザ登録CSV");
-//$smarty->assign('CSS_FILE_NAME', "user_regist");
+$smarty->assign('CSS_FILE_NAME', "admin");
 $smarty->assign('MAIN_HTML', $smarty->fetch('admin/user_regist.tpl'));
 
 // Sentinel リポジトリ一覧

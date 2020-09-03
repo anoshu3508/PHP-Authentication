@@ -11,6 +11,10 @@ body {
     max-width: 370px;
 }
 
+.login form {
+    padding: 0 1.5em;
+}
+
 .login .form-item {
     margin-bottom: 0.75em;
     width: 100%;
@@ -24,6 +28,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1.2em;
     height: 50px;
+    padding: 0;
     transition: border-color 0.3s;
     width: 100%;
 }

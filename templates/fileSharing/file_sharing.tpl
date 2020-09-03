@@ -43,7 +43,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="2" class="share_file_select">
                                     <input type="file" name="share_file" id="share_file" />
                                     <input type="submit" value="送信" />
                                 </td>
@@ -147,5 +147,5 @@
                     </tbody>
                 </table>
             </section>
-            {{include file="parts/deleteModal.tpl"}}
+            {include file="parts/deleteModal.tpl"}
         </div>

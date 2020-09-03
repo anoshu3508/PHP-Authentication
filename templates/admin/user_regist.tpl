@@ -1,5 +1,5 @@
 
-        <div style="margin-left: 5px">
+        <div class="admin">
             <h2 >ユーザ登録CSV</h2>
             {if isset($message)}
                 <div>{$message}</div>

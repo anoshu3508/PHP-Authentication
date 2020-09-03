@@ -1,5 +1,5 @@
 
-        <div style="margin-left: 5px">
+        <div class="admin">
             <h2 >管理者トップページ</h2>
             <form action="/employee/" method="GET">
                 <input type="hidden" name="action" value="userRegist" />

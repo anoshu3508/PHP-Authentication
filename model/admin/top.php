@@ -9,6 +9,6 @@ if ($USER_INFO !== null) {
 }
 
 $smarty->assign('PAGE_TITLE', "管理者トップページ");
-// $smarty->assign('CSS_FILE_NAME', "admin_top");
+$smarty->assign('CSS_FILE_NAME', "admin");
 // $smarty->assign('JS_FILE_NAME', "admin_top");
 $smarty->assign('MAIN_HTML', $smarty->fetch('admin/top.tpl'));

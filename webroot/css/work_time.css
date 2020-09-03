@@ -1,0 +1,10 @@
+.work_time section {
+    width: 100%;
+    max-width: 600px;
+    min-width: 310px;
+    margin: 5px auto 50px;
+}
+
+.work_time .col-form-label {
+    font-size: 1rem;
+}
