@@ -63,18 +63,6 @@
     height: 100%;
 }
 
-.file_sharing .success_message {
-    text-align: center;
-    color: #00c821;
-    font-weight: bold;
-}
-
-.file_sharing .error_message {
-    text-align: center;
-    color: #f00;
-    font-weight: bold;
-}
-
 .file_sharing .ico_download {
     position: relative;
 }

@@ -37,32 +37,32 @@ try {
 
     // 全員共有の場合
     if ($shareAllFlag === '1') {
-        $fileSharing = ORM::for_table('file_sharing')->create();
-        $fileSharing->file_name = $fileName;
-        $fileSharing->file_size = $fileSize;
-        $fileSharing->upload_user_id = $USER_INFO->id;
-        $fileSharing->share_all_flag = $shareAllFlag;
-        $fileSharing->save();
+        $fileSharingORM = ORM::for_table('file_sharing')->create();
+        $fileSharingORM->file_name = $fileName;
+        $fileSharingORM->file_size = $fileSize;
+        $fileSharingORM->upload_user_id = $USER_INFO->id;
+        $fileSharingORM->share_all_flag = $shareAllFlag;
+        $fileSharingORM->save();
 
     // 非公開の場合
     } elseif ($privateFlag) {
-        $fileSharing = ORM::for_table('file_sharing')->create();
-        $fileSharing->file_name = $fileName;
-        $fileSharing->file_size = $fileSize;
-        $fileSharing->upload_user_id = $USER_INFO->id;
-        $fileSharing->share_user_id = null;
-        $fileSharing->save();
+        $fileSharingORM = ORM::for_table('file_sharing')->create();
+        $fileSharingORM->file_name = $fileName;
+        $fileSharingORM->file_size = $fileSize;
+        $fileSharingORM->upload_user_id = $USER_INFO->id;
+        $fileSharingORM->share_user_id = null;
+        $fileSharingORM->save();
 
     // 個別共有の場合
     } else {
         // 共有者ID毎にDBに登録
         foreach ($shareUserIds as $suId) {
-            $fileSharing = ORM::for_table('file_sharing')->create();
-            $fileSharing->file_name = $fileName;
-            $fileSharing->file_size = $fileSize;
-            $fileSharing->upload_user_id = $USER_INFO->id;
-            $fileSharing->share_user_id = $suId;
-            $fileSharing->save();
+            $fileSharingORM = ORM::for_table('file_sharing')->create();
+            $fileSharingORM->file_name = $fileName;
+            $fileSharingORM->file_size = $fileSize;
+            $fileSharingORM->upload_user_id = $USER_INFO->id;
+            $fileSharingORM->share_user_id = $suId;
+            $fileSharingORM->save();
         }
     }
 

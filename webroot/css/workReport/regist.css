@@ -1,0 +1,16 @@
+.regist_work_report section {
+    width: 100%;
+    max-width: 600px;
+    min-width: 310px;
+    margin: 5px auto 50px;
+}
+
+.regist_work_report .col-form-label,
+.regist_work_report p {
+    font-size: 1rem;
+}
+
+.regist_work_report .success_message,
+.regist_work_report .error_message {
+    font-size: 0.875rem;
+}

@@ -4,6 +4,13 @@
 //         return false;
 //     });
 // });
+new ScrollHint('.table-responsive', {
+    scrollHintIconAppendClass: 'scroll-hint-icon-white', // white-icon will appear
+    applyToParents: true,
+    i18n: {
+      scrollable: 'スクロールできます'
+    }
+});
 
 /**
  * アクションを実行

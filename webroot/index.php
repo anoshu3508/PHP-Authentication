@@ -10,6 +10,6 @@ $smarty->setTemplateDir(TEMPLATES);
 $smarty->setCompileDir(TEMPLATES_COMPILE);
 $smarty->setConfigDir(CONFIG);
 $smarty->setCacheDir(CACHE);
-$smarty->setPluginsDir(PLUGINS);
+$smarty->addPluginsDir(PLUGINS);
 
 require MODEL . 'common.php';

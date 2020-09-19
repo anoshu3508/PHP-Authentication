@@ -128,13 +128,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     require_once MODEL . 'fileSharing/deleteShareFile.php';
                     break;
                 /****************************************
-                 * ファイル共有画面
+                 * 作業報告書画面
                  ****************************************/ 
-                case 'workTime':
-                    require_once MODEL . 'workTime/workTime.php';
+                case 'workReport':
+                    require_once MODEL . 'workReport/workReport.php';
                     break;
-                case 'workTimeConfirm':
-                    require_once MODEL . 'workTime/workTimeConfirm.php';
+                case 'registWorkReport':
+                    require_once MODEL . 'workReport/registWorkReport.php';
+                    break;
+                case 'confirmWorkReport':
+                    require_once MODEL . 'workReport/confirmWorkReport.php';
+                    break;
+                case 'completeWorkReport':
+                    require_once MODEL . 'workReport/completeWorkReport.php';
                     break;
                 /****************************************
                  * ログアウト

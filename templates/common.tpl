@@ -10,6 +10,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/scroll-hint@latest/css/scroll-hint.css">
         <link rel="stylesheet" href="/employee/css/vendor/sumoselect/sumoselect.css">
         <link rel="stylesheet" href="/employee/css/vendor/remodal/remodal.css">
         <link rel="stylesheet" href="/employee/css/vendor/remodal/remodal-default-theme.css">
@@ -26,6 +27,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/ja.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="https://unpkg.com/scroll-hint@latest/js/scroll-hint.min.js"></script>
         <script src="/employee/js/vendor/jquery.sumoselect.min.js"></script>
         <script src="/employee/js/vendor/remodal.js"></script>
         <script src="/employee/js/common.js"></script>

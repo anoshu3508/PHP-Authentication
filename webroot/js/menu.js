@@ -8,10 +8,10 @@ function postToFileSharing() {
 }
 
 /**
- * 「作業時間日付選択」に移動
+ * 「作業報告一覧」に移動
  * 
  * @return {undefined}
  */
-function postToWorkTime() {
-    postToAction('workTime');
+function postToWorkReport() {
+    postToAction('workReport');
 }

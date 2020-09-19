@@ -117,6 +117,18 @@ header {
     text-decoration: none;
 }
 
+.success_message {
+    text-align: center;
+    color: #00c821;
+    font-weight: bold;
+}
+
+.error_message {
+    text-align: center;
+    color: #f00;
+    font-weight: bold;
+}
+
 /* Datepicker */
 .datepicker-days th.dow:first-child,
 .datepicker-days td:first-child {
