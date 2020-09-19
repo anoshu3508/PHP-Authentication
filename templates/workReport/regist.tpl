@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-5 col-5"></div>
-                            </div>  
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-5 col-5"></div>
-                            </div>  
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-5 col-5"></div>
-                            </div>  
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -157,5 +157,11 @@
                         </div>
                     </form>
                 </div>
+                {* JavaScript で使用する要素 *}
+                <select class="d-none" name="work_flag_all">
+                    {foreach from=$workFlagSelectAllList item=name key=value}
+                        <option value="{$value}"{if $value==$workReport.work_flag} selected{/if}>{$name}</option>
+                    {/foreach}
+                </select>
             </section>
         </div>

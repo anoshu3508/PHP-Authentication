@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         switch ($action) {
             /****************************************
              * ユーザ登録CSV（管理者機能）
-             ****************************************/ 
+             ****************************************/
             case 'userRegist':
                 require_once MODEL . 'admin/userRegist.php';
                 break;
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             switch ($action) {
                 /****************************************
                  * ログイン画面
-                 ****************************************/ 
+                 ****************************************/
                 case 'login':
                     require_once MODEL . 'login/login.php';
                     break;
@@ -108,13 +108,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     break;
                 /****************************************
                  * メニュー画面
-                 ****************************************/ 
+                 ****************************************/
                 case 'menu':
                     require_once MODEL . 'menu/menu.php';
                     break;
                 /****************************************
                  * ファイル共有画面
-                 ****************************************/ 
+                 ****************************************/
                 case 'fileSharing':
                     require_once MODEL . 'fileSharing/fileSharing.php';
                     break;
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     break;
                 /****************************************
                  * 作業報告書画面
-                 ****************************************/ 
+                 ****************************************/
                 case 'workReport':
                     require_once MODEL . 'workReport/workReport.php';
                     break;
@@ -144,13 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     break;
                 /****************************************
                  * ログアウト
-                 ****************************************/ 
+                 ****************************************/
                 case 'logout':
                     require_once MODEL . 'header/logout.php';
                     break;
                 /****************************************
                  * エラー画面
-                 ****************************************/ 
+                 ****************************************/
                 default:
                     require_once MODEL . 'error.php';
             }
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             switch ($action) {
                 /****************************************
                  * ログイン画面（認証処理）
-                 ****************************************/ 
+                 ****************************************/
                 case 'authentication':
                     require_once MODEL . 'login/authentication.php';
                     break;

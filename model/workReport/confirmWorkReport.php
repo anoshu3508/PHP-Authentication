@@ -40,7 +40,7 @@ try {
     }
 
     // バリデーション実行（エラーの場合は例外にスロー）
-    validateWorkReport($workReport, $workFlagSelectList);
+    validateRegistWorkReport($workReport, $workFlagSelectList);
 
     // 稼働時間を計算
     $workReport['operation_hours'] = calcOperationHours(
@@ -79,12 +79,12 @@ if ($errorFlag) {
 }
 
 /**
- * 作業報告情報のバリデーション
- * 
+ * 作業報告登録のバリデーション
+ *
  * @param $workReport 作業報告情報
  * @param $workFlagSelectList 勤務フラグ一覧
  */
-function validateWorkReport($workReport, $workFlagSelectList) {
+function validateRegistWorkReport($workReport, $workFlagSelectList) {
     $validFlag = true;
     $message = '';
 
@@ -96,7 +96,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '客先は255文字以下で入力してください。<br/>';
     }
-    
+
     // 勤務フラグ
     if ($workReport['work_flag'] === '') {
         $validFlag = false;
@@ -105,7 +105,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '勤務フラグの値が不正です。<br/>';
     }
-    
+
     // 日付
     if ($workReport['date'] === '') {
         $validFlag = false;
@@ -115,12 +115,17 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         if (!checkdate($month, $day, $year)) {
             $validFlag = false;
             $message .= '日付は「YYYY/MM/DD」の形式で入力してください。<br/>';
-        } elseif ((int)$year < 2005) {
+        } elseif (
+            !preg_match(
+                '/^(200[5-9]{1}|20[1-9]{1}[0-9]{1})$/',
+                $year
+            )
+        ) {
             $validFlag = false;
-            $message .= '日付は2005年以降を指定してください。<br/>';
+            $message .= '日付は2005～2099年の間を指定してください。<br/>';
         }
     }
-    
+
     // 開始時刻
     if ($workReport['start_time'] === '') {
         $validFlag = false;
@@ -134,7 +139,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '開始時刻は「hh/mm」の形式で入力してください。<br/>';
     }
-    
+
     // 終了時刻
     if ($workReport['end_time'] === '') {
         $validFlag = false;
@@ -148,7 +153,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '終了時刻は「hh/mm」の形式で入力してください。<br/>';
     }
-    
+
     // 休憩時間
     if ($workReport['break_hours'] === '') {
         $validFlag = false;
@@ -163,7 +168,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '休憩時間は半角で入力してください。<br/>';
     }
-    
+
     // 残業時間
     if (
         $workReport['overtime_hours'] !== ''
@@ -178,7 +183,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '残業時間は半角で入力してください。<br/>';
     }
-    
+
     // 休出時間
     if (
         $workReport['holiday_hours'] !== ''
@@ -193,7 +198,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
         $validFlag = false;
         $message .= '休出時間は半角で入力してください。<br/>';
     }
-    
+
     // 深夜時数
     if (
         $workReport['midnight_hours'] !== ''
@@ -226,7 +231,7 @@ function validateWorkReport($workReport, $workFlagSelectList) {
 
 /**
  * 稼働時間を計算
- * 
+ *
  * @param $startTime 開始時刻
  * @param $endTime 終了時刻
  * @param $breakHours 休憩時間

@@ -14,7 +14,7 @@ new ScrollHint('.table-responsive', {
 
 /**
  * アクションを実行
- * 
+ *
  * @param {string} action
  * @return {undefined}
  */
@@ -28,7 +28,7 @@ function postToAction(action) {
 
 /**
  * 「メニュー」に移動
- * 
+ *
  * @return {undefined}
  */
 function postToMenu() {
@@ -37,7 +37,7 @@ function postToMenu() {
 
 /**
  * 「ログアウト」を実行
- * 
+ *
  * @return {undefined}
  */
 function postToLogout() {

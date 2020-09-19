@@ -41,7 +41,7 @@ require_once 'workReport.php';
 
 /**
  * 作業報告情報を登録（日別作業報告テーブル）
- * 
+ *
  * @param $workReport 作業報告情報
  */
 function registWorkReportDaily($workReport, $user_id) {
@@ -77,7 +77,7 @@ function registWorkReportDaily($workReport, $user_id) {
         $workReportDailyORM->start_time = $workReport['start_time'];
         $workReportDailyORM->end_time = $workReport['end_time'];
         $workReportDailyORM->break_hours = $workReport['break_hours'];
-        $workReportDailyORM->operation_hours = $workReport['operation_hours'];var_dump($workReport['operation_hours']);
+        $workReportDailyORM->operation_hours = $workReport['operation_hours'];
         $workReportDailyORM->overtime_hours = $workReport['overtime_hours'];
         $workReportDailyORM->holiday_hours = $workReport['holiday_hours'];
         $workReportDailyORM->midnight_hours = $workReport['midnight_hours'];
@@ -88,7 +88,7 @@ function registWorkReportDaily($workReport, $user_id) {
 
 /**
  * 作業報告情報を登録（月別作業報告テーブル）
- * 
+ *
  * @param $workReport 作業報告情報
  */
 function registWorkReportMonthly($workReport, $user_id) {

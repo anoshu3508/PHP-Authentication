@@ -49,7 +49,7 @@ $(function() {
         csvDispCount: 2,
         selectAll: true,
         okCancelInMulti: true,
-        captionFormatAllSelected: "全員に共有" 
+        captionFormatAllSelected: "全員に共有"
     });
     $('.file_upload #share_user_id').change(function() {
         // チェックボックスをオフ
@@ -87,10 +87,10 @@ $(function() {
         postToDeleteShareFile(deleteFileName);
     });
 })
-    
+
 /**
  * 「ファイルのダウンロード」を実行
- * 
+ *
  * @param {string} id
  * @return {undefined}
  */
@@ -105,7 +105,7 @@ function postToDownloadShareFile(id) {
 
 /**
  * 「ファイルを削除」を実行
- * 
+ *
  * @param {string} fileName
  * @return {undefined}
  */

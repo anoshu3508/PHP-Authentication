@@ -1,6 +1,6 @@
 /**
  * 「ファイル共有」に移動
- * 
+ *
  * @return {undefined}
  */
 function postToFileSharing() {
@@ -9,7 +9,7 @@ function postToFileSharing() {
 
 /**
  * 「作業報告一覧」に移動
- * 
+ *
  * @return {undefined}
  */
 function postToWorkReport() {

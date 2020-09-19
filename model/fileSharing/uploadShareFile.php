@@ -79,7 +79,7 @@ require_once 'fileSharing.php';
 
 /**
  * ファイルをアップロード
- * 
+ *
  * @param $file ファイル
  * @return アップロードファイルのフルパス
  */

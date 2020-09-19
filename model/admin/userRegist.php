@@ -52,19 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $skipUserCount++;
                         $message .= 'このメールアドレスは既に使用されているため、登録処理をスキップしました。';
                         $message .= '（行番号:' . ($idx + 1) . ', 値:' . $row['email'] . '）<br/>';
-                    } else { 
+                    } else {
                         // 存在しない場合は新規登録
                         $newUserCount++;
                         $user = Sentinel::registerAndActivate($userInfo);
                     }
-                    break; 
+                    break;
                 // 更新
                 case 'EDIT':
                     if ($user !== null) {
                         // 存在する場合は更新
                         $updateUserCount++;
                         $user = $userObj->update($user, $userInfo);
-                    } else { 
+                    } else {
                         // 存在しない場合はスキップ
                         $skipUserCount++;
                         $message .= 'このメールアドレスは未使用のため、更新処理をスキップしました。';
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         // 存在する場合は削除
                         $deleteUserCount++;
                         $user->delete();
-                    } else { 
+                    } else {
                         // 存在しない場合はスキップ
                         $skipUserCount++;
                         $message .= 'このメールアドレスは未使用のため、削除処理をスキップしました。';
@@ -131,7 +131,7 @@ $throttleObj = Sentinel::getThrottleRepository();
 
 /**
  * CSVファイルアップロード
- * 
+ *
  * @param $csvFile CSVファイル
  * @return アップロードファイルのフルパス
  */
@@ -170,7 +170,7 @@ function uploadUserRegistCsvFile($csvFile) {
 
 /**
  * CSVファイル読み込み
- * 
+ *
  * @param $filePath ファイルパス
  * @return CSVレコード
  */
@@ -212,7 +212,7 @@ function readUserRegistCsvFile($filePath) {
 
 /**
  * CSVファイルのバリデーション
- * 
+ *
  * @param $csvRecords ファイルパス
  * @param &$errorMsg エラーメッセージ（参照渡し）
  * @return バリデーション結果
@@ -234,7 +234,7 @@ function validateUserRegistCsvFile($csvRecords, &$errorMsg) {
             $errorMsg .= 'メールアドレスが入力されていません。（行番号:' . ($idx + 1) . '）<br/>';
             continue;
         }
-    
+
         // 新規の場合のチェック
         if ($row['category'] === 'ADD') {
             // パスワードの未入力チェック（新規のみ必須）

@@ -68,7 +68,7 @@ $smarty->assign('MAIN_HTML', $smarty->fetch('workReport/work_report.tpl'));
 
 /**
  * 月日別作業報告一覧を作成
- * 
+ *
  * @param $year 年
  * @param $month 月
  * @param $holidayMst 祝日マスタ一覧

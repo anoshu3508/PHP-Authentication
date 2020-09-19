@@ -55,7 +55,7 @@ $(function() {
 
 /**
  * 「作業報告一覧」に移動
- * 
+ *
  * @return {undefined}
  */
 function postToWorkReport() {
@@ -64,7 +64,7 @@ function postToWorkReport() {
 
 /**
  * 「作業報告登録」に移動
- * 
+ *
  * @return {undefined}
  */
 function postToRegistWorkReport() {

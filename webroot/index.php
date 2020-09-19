@@ -12,4 +12,13 @@ $smarty->setConfigDir(CONFIG);
 $smarty->setCacheDir(CACHE);
 $smarty->addPluginsDir(PLUGINS);
 
+// ----------------------------------------------
+// Ajax通信
+// ----------------------------------------------
+$ajaxApi = filter_input(INPUT_GET, 'api');
+if ($ajaxApi === 'holidayJson') {
+    require_once MODEL . 'ajax/holidayJson.php';
+    exit;
+}
+
 require MODEL . 'common.php';
