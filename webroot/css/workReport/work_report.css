@@ -23,10 +23,6 @@
     max-width: 200px;
 }
 
-.work_report .work_report_monthly .yyyymm input {
-    display: none;
-}
-
 .work_report .work_report_monthly .yyyymm .input-group-append {
     cursor: pointer;
 }
@@ -54,6 +50,20 @@
 /*=============================================================================
  = .work_report_daily
  ============================================================================*/
+@media (min-width: 360px) {
+    .work_report .work_report_daily button.d-none {
+        display: block!important;
+    }
+    .work_report .work_report_daily button.d-block {
+        display: none!important;
+    }
+}
+
+.work_report .work_report_daily .day {
+    width: 50px;
+    text-align: center;
+}
+
 .work_report .work_report_daily div.table-responsive {
     box-shadow: 0 0 15px -6px #00000073;
 }
@@ -98,6 +108,7 @@
 }
 
 .work_report .work_report_daily table tbody td {
+    font-size: 1rem;
     height: 20px;
 }
 

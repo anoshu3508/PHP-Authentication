@@ -14,7 +14,7 @@
                 <div class="container">
                     <form action="/employee/" method="POST">
                         <input type="hidden" name="action" value="confirmWorkReport" />
-                        <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}">
+                        <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 
                         <h2>月別項目</h2>
 

@@ -142,6 +142,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'completeWorkReport':
                     require_once MODEL . 'workReport/completeWorkReport.php';
                     break;
+                case 'outputWorkReport':
+                    require_once MODEL . 'workReport/outputWorkReport.php';
+                    break;
                 /****************************************
                  * ログアウト
                  ****************************************/

@@ -14,7 +14,7 @@
                 <h2>ファイルをアップロード</h2>
                 <form action="/employee/" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="uploadShareFile" />
-                    <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}">
+                    <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
                     <table>
                         <thead>
                             <tr>

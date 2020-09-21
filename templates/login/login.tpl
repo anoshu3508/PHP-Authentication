@@ -4,7 +4,7 @@
                 <h1>Sign In</h1>
                 <form action="/employee/" method="POST">
                     <input type="hidden" name="action" value="authentication" />
-                    <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}">
+                    <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
 
                     {if $errorFlg}
                         <div class="form-item">

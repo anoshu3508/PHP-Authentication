@@ -1,12 +1,25 @@
 <?php
 use Illuminate\Support\Collection;
+use Josantonius\Session\Session;
+
+// TODO [マスタ化] 勤務フラグ一覧を取得
+$workFlagList = [
+    '0' => '平日通常出社',
+    '1' => '全日休暇',
+    '2' => '午前半休',
+    '3' => '午後半休',
+    '4' => '振替休暇',
+    '5' => '振替出勤',
+    '6' => '休日出勤',
+    '9' => '休日',
+];
 
 // 作業者名を取得
 $worker = $USER_INFO->last_name . ' ' . $USER_INFO->first_name;
 
 // 年月を取得
-$yyyymm = filter_input(INPUT_POST, 'yyyymm');
-if (!preg_match('/(2[0-9]{3})\/([1-9]{1}|0[1-9]{1}|1[1-2]{1})/', $yyyymm)) {
+$yyyymm = filter_input(INPUT_POST, 'yyyymm') ?? Session::pull('workReportYyyymm');
+if (!preg_match('/(200[5-9]{1}|20[1-9]{1}[0-9]{1})\/([1-9]{1}|0[1-9]{1}|1[1-2]{1})/', $yyyymm)) {
     $yyyymm = date('Y/m');
 }
 
@@ -26,11 +39,11 @@ if (!$workReportMonthly) {
 $workReportDaily = ORM::for_table('work_report_daily')
     ->select_many_expr([
         'date' => 'DATE_FORMAT(date, "%Y/%m/%d")',
+        'start_time' => 'TIME_FORMAT(start_time, "%k:%i")',
+        'end_time' => 'TIME_FORMAT(end_time, "%k:%i")',
     ])
     ->select_many([
         'work_flag',
-        'start_time',
-        'end_time',
         'break_hours',
         'operation_hours',
         'overtime_hours',
@@ -42,6 +55,26 @@ $workReportDaily = ORM::for_table('work_report_daily')
     ->where_raw('date BETWEEN ? AND ?', [$yyyymm . '/01', $yyyymm . '/31'])
     ->order_by_asc('date')
     ->find_many();
+
+// 日別の作業報告一覧を配列化
+$workReportDailyColumnList = [
+    'date',
+    'work_flag',
+    'start_time',
+    'end_time',
+    'break_hours',
+    'operation_hours',
+    'overtime_hours',
+    'holiday_hours',
+    'midnight_hours',
+    'work_description'
+];
+$workReportDailyArray = [];
+foreach ($workReportDaily as $key => $item) {
+    foreach ($workReportDailyColumnList as $column) {
+        $workReportDailyArray[$key][$column] = $item->$column;
+    }
+}
 
 // 祝日マスタから今月の祝日情報を取得
 $holidayMst = ORM::for_table('holiday_mst')
@@ -58,12 +91,12 @@ $holidayMst = ORM::for_table('holiday_mst')
 
 // 月日別作業報告一覧を作成
 list($year, $month) = explode('/', $yyyymm);
-$workReportDateList = createWorkReportDateList($year, $month, $holidayMst, $workReportDaily);
+$workReportDateList = createWorkReportDateList($year, $month, $holidayMst, $workReportDailyArray);
 
 $smarty->assign('PAGE_TITLE', "作業報告一覧");
 $smarty->assign('CSS_FILE_NAME', "workReport/work_report");
 $smarty->assign('JS_FILE_NAME', "workReport/work_report");
-$smarty->assign(compact('worker', 'yyyymm', 'workReportMonthly', 'workReportDateList'));
+$smarty->assign(compact('worker', 'yyyymm', 'workReportMonthly', 'workReportDateList', 'workFlagList'));
 $smarty->assign('MAIN_HTML', $smarty->fetch('workReport/work_report.tpl'));
 
 /**
@@ -72,7 +105,7 @@ $smarty->assign('MAIN_HTML', $smarty->fetch('workReport/work_report.tpl'));
  * @param $year 年
  * @param $month 月
  * @param $holidayMst 祝日マスタ一覧
- * @param $workReportDaily 日別の作業報告一覧
+ * @param $workReportDaily 日別の作業報告一覧（配列）
  * @return 月日別作業報告一覧
  */
 function createWorkReportDateList($year, $month, $holidayMst, $workReportDaily) {
@@ -103,7 +136,7 @@ function createWorkReportDateList($year, $month, $holidayMst, $workReportDaily) 
 
         // 作業報告情報を格納
         if (isset($workReportFilter)) {
-            $workReportDateList[$day] += json_decode(json_encode($workReportFilter), true);
+            $workReportDateList[$day] += $workReportFilter;
         }
 
         // 祝日情報を格納
@@ -117,7 +150,7 @@ function createWorkReportDateList($year, $month, $holidayMst, $workReportDaily) 
             $holidayInfo['holiday_name'] = null;
             $holidayInfo['company_holiday_flag'] = 0;
         }
-        $workReportDateList[$day] += json_decode(json_encode($holidayInfo), true);
+        $workReportDateList[$day] += $holidayInfo;
 
         $dayOfWeek++;
         // 7の場合は0（日曜）に変更

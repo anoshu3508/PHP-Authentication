@@ -4,7 +4,7 @@ use Josantonius\Session\Session;
 // 作業者名を取得
 $worker = $USER_INFO->last_name . ' ' . $USER_INFO->first_name;
 
-// 勤務フラグ一覧を取得
+// TODO [マスタ化] 勤務フラグ一覧を取得
 $workFlagSelectList = [
     '0' => '平日通常出社',
     '1' => '全日休暇',
@@ -57,6 +57,10 @@ try {
     // セッションに作業報告情報を登録
     Session::set('workReport', $workReport);
 
+    // セッションに年月情報を更新（入力画面で年月を変更していた場合を考慮）
+    $yyyymm = date('Y/m', strtotime(str_replace('/', '-', $workReport['date'])));
+    Session::set('workReportYyyymm', $yyyymm);
+
 } catch (Exception $e) {
     $message = $e->getMessage();
     $errorFlag = true;
@@ -82,7 +86,7 @@ if ($errorFlag) {
  * 作業報告登録のバリデーション
  *
  * @param $workReport 作業報告情報
- * @param $workFlagSelectList 勤務フラグ一覧
+ * @param $workFlagSelectList TODO [マスタ化] 勤務フラグ一覧
  */
 function validateRegistWorkReport($workReport, $workFlagSelectList) {
     $validFlag = true;

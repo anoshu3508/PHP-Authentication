@@ -4,7 +4,7 @@ use Josantonius\Session\Session;
 // 作業者名を取得
 $worker = $USER_INFO->last_name . ' ' . $USER_INFO->first_name;
 
-// 勤務フラグ一覧（すべて）を取得
+// TODO [マスタ化] 勤務フラグ一覧（すべて）を取得
 $workFlagSelectAllList = [
     '0' => '平日通常出社',
     '1' => '全日休暇',
@@ -44,6 +44,29 @@ if (!$workReportMonthly) {
         ->find_one();
 }
 
+// 日別の作業報告情報を取得
+$workReportDaily = ORM::for_table('work_report_daily')
+    ->select_many_expr([
+        'date' => 'DATE_FORMAT(date, "%Y/%m/%d")',
+        'start_time' => 'TIME_FORMAT(start_time, "%H:%i")',
+        'end_time' => 'TIME_FORMAT(end_time, "%H:%i")',
+    ])
+    ->select_many([
+        'work_flag',
+        'break_hours',
+        'operation_hours',
+        'overtime_hours',
+        'holiday_hours',
+        'midnight_hours',
+        'work_description'
+    ])
+    ->where([
+        'user_id' => $USER_INFO->id,
+        'date' => $date
+    ])
+    ->order_by_asc('date')
+    ->find_one();
+
 // 祝日マスタから今日の祝日情報を取得
 $holidayMstDay = ORM::for_table('holiday_mst')
     ->where('date', $date)
@@ -62,43 +85,27 @@ if ($holidayMstDay || $dayOfWeek === '0' || $dayOfWeek === '6') {
     $workFlagSelectList = array_slice($workFlagSelectAllList, 0, 5, true);
 }
 
-// // 祝日マスタから去年から来年分の祝日情報を取得
-// list($year, $month) = explode('/', $postData['yyyymm']);
-// $holidayMstMonth = ORM::for_table('holiday_mst')
-//     ->select_many_expr([
-//         'date' => 'DATE_FORMAT(date, "%Y/%m/%d")',
-//     ])
-//     ->where_raw('date BETWEEN ? AND ?', [$year . '/01/01', $year . '/12/31'])
-//     ->order_by_asc('date')
-//     ->find_many();
-//
-// // 今月分の祝日を配列に格納
-// $holidayList = [];
-// if (!empty($holidayMstMonth)) {
-//     foreach ($holidayMstMonth as $holiday) {
-//         $holidayList[] = $holiday->date;
-//     }
-// }
-// $holidayListJson = json_encode($holidayList);
-
 // 作業報告情報のデフォルト値を格納
 $workReportDefault = [
     'customer' => $workReportMonthly->customer ?? '',
-    'work_flag' => $workFlag,
+    'work_flag' => $workReportDaily->work_flag ?? $workFlag,
     'date' => $date,
-    'start_time' => '',
-    'end_time' => '',
-    'break_hours' => '',
-    'operation_hours' => '',
-    'overtime_hours' => '',
-    'holiday_hours' => '',
-    'midnight_hours' => '',
-    'work_description' => '',
+    'start_time' => $workReportDaily->start_time ?? '',
+    'end_time' => $workReportDaily->end_time ?? '',
+    'break_hours' => $workReportDaily->break_hours ?? '',
+    'operation_hours' => $workReportDaily->operation_hours ?? '',
+    'overtime_hours' => $workReportDaily->overtime_hours ?? '',
+    'holiday_hours' => $workReportDaily->holiday_hours ?? '',
+    'midnight_hours' => $workReportDaily->midnight_hours ?? '',
+    'work_description' => $workReportDaily->work_description ?? '',
 ];
 
 // セッションから作業報告情報を取得
 $workReport = Session::pull('workReport') ?? [];
 $workReport += $workReportDefault;
+
+// セッションに年月情報を格納
+Session::set('workReportYyyymm', $postData['yyyymm']);
 
 $smarty->assign('PAGE_TITLE', "作業報告登録");
 $smarty->assign('CSS_FILE_NAME', "workReport/regist");
