@@ -54,14 +54,10 @@ $(function() {
      * 日選択・編集ボタン
      */
     $(function() {
-        $('.work_report #edit_work_report').click(function() {
-            $('<form/>',{action:"/employee/", method:"post"})
-            .append('<input type="hidden" name="action" value="registWorkReport">')
-            .append('<input type="hidden" name="csrf_token" value="' + CSRF_TOKEN + '">')
-            .append('<input type="hidden" name="yyyymm" value="' + $(this).parents('form').find('input[name="yyyymm"]').val() + '">')
-            .append('<input type="hidden" name="day" value="' + $(this).parents('form').find('input[name="day_txt"]').val() + '">')
-            .appendTo($('body'))
-            .submit();
+        $('.work_report .regist_btn').click(function() {
+            var $form = $(this).parents('form');
+            $form.find('input[name="day"]').prop('disabled', true);
+            $form.submit();
         });
     });
 });

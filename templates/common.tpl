@@ -14,9 +14,9 @@
         <link rel="stylesheet" href="/employee/css/vendor/sumoselect/sumoselect.css">
         <link rel="stylesheet" href="/employee/css/vendor/remodal/remodal.css">
         <link rel="stylesheet" href="/employee/css/vendor/remodal/remodal-default-theme.css">
-        <link rel="stylesheet" href="/employee/css/common.css">
+        <link rel="stylesheet" href="/employee/css/common.css?{$smarty.now|date_format:'%Y%m%d'}">
         {if isset($CSS_FILE_NAME)}
-            <link rel="stylesheet" href="/employee/css/{$CSS_FILE_NAME}.css">
+            <link rel="stylesheet" href="/employee/css/{$CSS_FILE_NAME}.css?{$smarty.now|date_format:'%Y%m%d'}">
         {/if}
         <!-- JavaScript -->
         <script src="/employee/js/vendor/jquery-3.5.1.min.js"></script>
@@ -30,9 +30,9 @@
         <script src="https://unpkg.com/scroll-hint@latest/js/scroll-hint.min.js"></script>
         <script src="/employee/js/vendor/jquery.sumoselect.min.js"></script>
         <script src="/employee/js/vendor/remodal.js"></script>
-        <script src="/employee/js/common.js"></script>
+        <script src="/employee/js/common.js?{$smarty.now|date_format:'%Y%m%d'}"></script>
         {if isset($JS_FILE_NAME)}
-            <script src="/employee/js/{$JS_FILE_NAME}.js"></script>
+            <script src="/employee/js/{$JS_FILE_NAME}.js?{$smarty.now|date_format:'%Y%m%d'}"></script>
         {/if}
         <script>
             var CSRF_TOKEN = "{$CSRF_TOKEN}";

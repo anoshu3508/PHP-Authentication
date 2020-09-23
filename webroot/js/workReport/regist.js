@@ -9,8 +9,18 @@ $(function() {
         return '入力内容を破棄します。';
     });
 
-    $('.regist_work_report form').submit(function() {
-        $(window).off('beforeunload');
+    /**
+     * フォーム送信前処理
+     */
+    $(function() {
+        var submitFlag = false;
+        $('.regist_work_report form').submit(function() {
+            if (submitFlag) {
+                return false;
+            }
+            submitFlag = true;
+            $(window).off('beforeunload');
+        });
     });
 
     /**

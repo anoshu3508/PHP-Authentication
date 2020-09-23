@@ -43,7 +43,7 @@
                             <tbody>
                                 <tr>
                                     <td>{$worker}</td>
-                                    <td>{$workReportMonthly->customer|default:'-'}</td>
+                                    <td>{$workReportMonthly->customer|default:'－'}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -60,16 +60,16 @@
 
                         <div class="d-flex justify-content-between mx-2 mb-2">
                             <div>
-                                <button type="submit" class="d-none btn btn-primary">作業時間入力</button>
-                                <button type="submit" class="d-block btn btn-primary">作業入力</button>
+                                <button type="button" class="regist_btn d-none btn btn-primary">作業時間入力</button>
+                                <button type="button" class="regist_btn d-block btn btn-primary">作業入力</button>
                             </div>
                             <div class="d-flex justify-content-end text-sm-right">
                                 <div>
-                                    <input type="text" name="day_txt" class="day form-control" value="1" maxlength="2" />
+                                    <input type="text" name="day" class="day form-control" value="1" maxlength="2" autocomplete="off" />
                                 </div>
                                 <div>
                                     <span class="mx-1">日を</span>
-                                    <button type="button" class="btn btn-primary" id="edit_work_report">編集</button>
+                                    <button type="submit" class="btn btn-primary">編集</button>
                                 </div>
                             </div>
                         </div>
