@@ -9,6 +9,6 @@
                 <input type="hidden" name="action" value="userRegist" />
                 <input type="hidden" name="csrf_token" value="{$CSRF_TOKEN}" />
                 <input type="file" name="csv_file" accept=".csv" />
-                <input type="submit" value="送信" />
+                <input type="submit" value="登録" />
             </form>
         </div>
