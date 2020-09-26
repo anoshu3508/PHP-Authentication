@@ -261,7 +261,7 @@ function validateUserRegistCsvFile($csvRecords, &$errorMsg) {
         $catPattern = "/^ADD|EDIT|DELETE$/";
         if (!preg_match($catPattern, $row['category'])) {
             $csvValidFlg = false;
-            $errorMsg .= '処理区分は ADD, EDIT, DELETE のいずれかを使用して下さい。（行番号:' . ($idx + 1) . ', 値:' . $row['password'] . '）<br/>';
+            $errorMsg .= '処理区分は ADD, EDIT, DELETE のいずれかを使用して下さい。（行番号:' . ($idx + 1) . ', 値:' . $row['category'] . '）<br/>';
         }
 
         // メールアドレスの形式チェック

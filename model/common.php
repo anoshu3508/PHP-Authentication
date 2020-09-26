@@ -36,7 +36,7 @@ $capsule->bootEloquent();
 $adminFlg = false;
 if (isset($_GET['adminkey'])) {
     $adminkey = filter_input(INPUT_GET, 'adminkey');
-    setcookie('adminkey', $adminkey);
+    setcookie('adminkey', $adminkey, time()+3600);
 } else {
     $adminkey = filter_input(INPUT_COOKIE, 'adminkey');
 }
