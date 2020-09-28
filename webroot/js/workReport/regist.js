@@ -266,7 +266,7 @@ $(function() {
             $(this).val(num.toFixed(2));
         }
         // 勤務フラグ別に関連項目を更新
-        updateRelatedItemsByWorkFlag();
+        // updateRelatedItemsByWorkFlag();
 	});
 
     /**
@@ -289,7 +289,7 @@ $(function() {
             $(this).val(num.toFixed(2));
         }
         // 勤務フラグ別に関連項目を更新
-        updateRelatedItemsByWorkFlag();
+        // updateRelatedItemsByWorkFlag();
 	});
 
     /**
@@ -312,7 +312,7 @@ $(function() {
             $(this).val(num.toFixed(2));
         }
         // 勤務フラグ別に関連項目を更新
-        updateRelatedItemsByWorkFlag();
+        // updateRelatedItemsByWorkFlag();
     });
 
     /**

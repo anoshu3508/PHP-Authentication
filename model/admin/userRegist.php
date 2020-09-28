@@ -268,7 +268,7 @@ function validateUserRegistCsvFile($csvRecords, &$errorMsg) {
         $emailPattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
         if (!preg_match($emailPattern, $row['email'])) {
             $csvValidFlg = false;
-            $errorMsg .= 'メールアドレスの形式が不正です（行番号:' . ($idx + 1) . ', 値:' . $row['email'] . '）<br/>';
+            $errorMsg .= 'メールアドレスの形式が不正です。（行番号:' . ($idx + 1) . ', 値:' . $row['email'] . '）<br/>';
         } else {
             // アクティブゼロドメイン以外のメールアドレスは許容しない
             $azDomainPattern = "/@activezero.co.jp$/";

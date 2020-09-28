@@ -11,7 +11,7 @@ try {
         throw new Exception("再読み込みによる操作は無効です。");
     }
 
-    // 共有者ID、全共有フラグを取得
+    // 共有者ID、全共有フラグ、非公開フラグを取得
     $shareUserIds = filter_input(INPUT_POST, 'share_user_id', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
     $shareAllFlag = filter_input(INPUT_POST, 'share_all_flag');
     $privateFlag = filter_input(INPUT_POST, 'private_flag');
